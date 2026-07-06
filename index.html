@@ -546,6 +546,18 @@
     // Form submission
     document.getElementById('contact-form').addEventListener('submit', function(e) {
       e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const mailTo = 'zencronautomation.help@gmail.com';
+      const subject = encodeURIComponent('Website Contact Form Submission');
+      const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+      );
+
+      window.location.href = `mailto:${mailTo}?subject=${subject}&body=${body}`;
+
       const successMessage = document.getElementById('success-message');
       successMessage.classList.remove('hidden');
       this.reset();
@@ -578,3 +590,4 @@
   </script>
 </body>
 </html>
+
