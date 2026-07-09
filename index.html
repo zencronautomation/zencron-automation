@@ -673,7 +673,7 @@
 
     const applySiteContent = async () => {
       try {
-        const response = await fetch('/.netlify/functions/content');
+        const response = await fetch('contents page/netlify/functions/content');
         const data = response.ok ? await response.json() : defaultContent;
         const setText = (id, value) => {
           const el = document.getElementById(id);
