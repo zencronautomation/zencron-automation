@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zencron Master Control</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: Inter, Segoe UI, sans-serif;
+        background: linear-gradient(135deg, #020617 0%, #07111f 45%, #111827 100%);
+        color: #f8fafc;
+      }
+      .panel {
+        background: rgba(2, 6, 23, 0.82);
+        border: 1px solid rgba(103, 232, 249, 0.2);
+        backdrop-filter: blur(16px);
+      }
+      label { display: block; font-size: 0.9rem; margin-bottom: 0.35rem; color: #cbd5e1; }
+      input, textarea {
+        width: 100%;
+        border: 1px solid rgba(255,255,255,0.14);
+        background: rgba(15, 23, 42, 0.9);
+        color: white;
+        padding: 0.75rem 0.9rem;
+        border-radius: 0.75rem;
+        outline: none;
+      }
+      input:focus, textarea:focus { border-color: #67e8f9; }
+    </style>
+  </head>
+  <body class="min-h-screen p-4 md:p-8">
+    <div id="loginScreen" class="max-w-md mx-auto panel rounded-[1.5rem] p-8 shadow-2xl">
+      <p class="text-cyan-300 uppercase tracking-[0.3em] text-sm mb-2">Protected Access</p>
+      <h1 class="text-2xl font-bold mb-4">Enter admin password</h1>
+      <input id="passwordInput" type="password" placeholder="Password" class="mb-3" />
+      <button id="loginBtn" class="w-full px-4 py-2 rounded-full bg-cyan-400 text-slate-950 font-semibold">Unlock</button>
+      <p id="loginError" class="text-red-400 text-sm mt-3 hidden">Incorrect password.</p>
+    </div>
+
+    <div id="appScreen" class="max-w-6xl mx-auto hidden">
+      <div class="panel rounded-[1.5rem] p-6 md:p-8 shadow-2xl">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
+          <div>
+            <p class="text-cyan-300 uppercase tracking-[0.3em] text-sm mb-2">Master Control</p>
+            <h1 class="text-3xl md:text-4xl font-bold">Update the main website from here</h1>
+            <p class="text-slate-300 mt-2">Edit the content below and it will be applied to the homepage instantly.</p>
+          </div>
+          <div class="flex gap-3">
+            <button id="saveBtn" class="px-4 py-2 rounded-full bg-cyan-400 text-slate-950 font-semibold">Save Changes</button>
+            <button id="resetBtn" class="px-4 py-2 rounded-full border border-white/15 text-white">Reset</button>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-6">
+          <div class="space-y-5">
+            <div class="panel rounded-2xl p-5">
+              <h2 class="text-xl font-semibold mb-4">Hero Section</h2>
+              <label>Badge</label>
+              <input id="heroBadge" />
+              <label class="mt-3">Title</label>
+              <input id="heroTitle" />
+              <label class="mt-3">Description</label>
+              <textarea id="heroDescription" rows="3"></textarea>
+              <label class="mt-3">Hero Image URL</label>
+              <input id="heroImage" />
+              <label class="mt-3">Primary CTA</label>
+              <input id="heroPrimary" />
+              <label class="mt-3">Secondary CTA</label>
+              <input id="heroSecondary" />
+              <label class="mt-3">Pill 1</label>
+              <input id="heroPill1" />
+              <label class="mt-3">Pill 2</label>
+              <input id="heroPill2" />
+              <label class="mt-3">Pill 3</label>
+              <input id="heroPill3" />
+            </div>
+
+            <div class="panel rounded-2xl p-5">
+              <h2 class="text-xl font-semibold mb-4">Services</h2>
+              <label>CCTV Title</label>
+              <input id="serviceCctvTitle" />
+              <label class="mt-3">CCTV Text</label>
+              <textarea id="serviceCctvText" rows="2"></textarea>
+              <label class="mt-3">Home Title</label>
+              <input id="serviceHomeTitle" />
+              <label class="mt-3">Home Text</label>
+              <textarea id="serviceHomeText" rows="2"></textarea>
+              <label class="mt-3">Bot Title</label>
+              <input id="serviceBotTitle" />
+              <label class="mt-3">Bot Text</label>
+              <textarea id="serviceBotText" rows="2"></textarea>
+            </div>
+          </div>
+
+          <div class="space-y-5">
+            <div class="panel rounded-2xl p-5">
+              <h2 class="text-xl font-semibold mb-4">About Section</h2>
+              <label>About Title</label>
+              <input id="aboutTitle" />
+              <label class="mt-3">About Description</label>
+              <textarea id="aboutDescription" rows="3"></textarea>
+              <label class="mt-3">About Image URL</label>
+              <input id="aboutImage" />
+              <label class="mt-3">Card 1 Title</label>
+              <input id="aboutCard1Title" />
+              <label class="mt-3">Card 1 Text</label>
+              <textarea id="aboutCard1Text" rows="2"></textarea>
+              <label class="mt-3">Card 2 Title</label>
+              <input id="aboutCard2Title" />
+              <label class="mt-3">Card 2 Text</label>
+              <textarea id="aboutCard2Text" rows="2"></textarea>
+              <label class="mt-3">Card 3 Title</label>
+              <input id="aboutCard3Title" />
+              <label class="mt-3">Card 3 Text</label>
+              <textarea id="aboutCard3Text" rows="2"></textarea>
+            </div>
+
+            <div class="panel rounded-2xl p-5">
+              <h2 class="text-xl font-semibold mb-4">Services & Footer</h2>
+              <label>Services Label</label>
+              <input id="servicesLabel" />
+              <label class="mt-3">Services Title</label>
+              <input id="servicesTitle" />
+              <label class="mt-3">Services Description</label>
+              <textarea id="servicesDescription" rows="2"></textarea>
+              <label class="mt-3">Footer Text</label>
+              <input id="footerText" />
+              <label class="mt-3">Footer Link Home</label>
+              <input id="footerLinkHome" />
+              <label class="mt-3">Footer Link Services</label>
+              <input id="footerLinkServices" />
+              <label class="mt-3">Footer Link Contact</label>
+              <input id="footerLinkContact" />
+            </div>
+
+            <div class="panel rounded-2xl p-5">
+              <h2 class="text-xl font-semibold mb-4">CTA & Contact</h2>
+              <label>CTA Heading</label>
+              <input id="ctaHeading" />
+              <label class="mt-3">CTA Description</label>
+              <textarea id="ctaDescription" rows="2"></textarea>
+              <label class="mt-3">CTA Button</label>
+              <input id="ctaButton" />
+              <label class="mt-3">Contact Heading</label>
+              <input id="contactHeading" />
+              <label class="mt-3">Contact Description</label>
+              <textarea id="contactDescription" rows="2"></textarea>
+              <label class="mt-3">Address</label>
+              <input id="contactAddress" />
+              <label class="mt-3">Phone</label>
+              <input id="contactPhone" />
+              <label class="mt-3">Email</label>
+              <input id="contactEmail" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto mt-6 hidden" id="previewPanel">
+      <div class="panel rounded-[1.5rem] p-6 shadow-2xl">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-xl font-semibold">Live Preview</h2>
+          <span class="text-sm text-slate-400">Updates as you type</span>
+        </div>
+        <div class="rounded-[1.2rem] border border-white/10 p-4 bg-black/20">
+          <p id="previewBadge" class="text-cyan-300 text-sm uppercase tracking-[0.2em] mb-2"></p>
+          <h3 id="previewTitle" class="text-2xl font-bold mb-2"></h3>
+          <p id="previewDescription" class="text-slate-300 text-sm"></p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const storageKey = 'zencronSiteContent';
+      const defaultContent = {
+        heroBadge: 'JavaScript • TypeScript • Designed to feel effortless',
+        heroTitle: 'The kind of experience people notice the moment they step in.',
+        heroDescription: 'We create intelligent spaces that feel calm, private, and beautifully in sync with daily life — from secure environments to custom automations that quietly do the heavy lifting.',
+        heroImage: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80',
+        aboutImage: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=80',
+        heroPrimary: 'Book a Private Consultation',
+        heroSecondary: 'See What We Build',
+        heroPill1: 'Private by design',
+        servicesLabel: 'Core services',
+        servicesTitle: 'Precision solutions for modern spaces.',
+        servicesDescription: 'Every installation is shaped around the way you live, work, and protect what matters most.',
+        footerText: '© 2026 Zencron Automation. Crafted for calm, intelligent living.',
+        footerLinkHome: 'Home',
+        footerLinkServices: 'Services',
+        footerLinkContact: 'Contact',
+        heroPill2: 'Built for everyday ease',
+        heroPill3: 'Crafted with JavaScript & TypeScript',
+        serviceCctvTitle: 'Private Surveillance',
+        serviceCctvText: 'Clear, reliable monitoring designed to keep watch without making the space feel overbuilt.',
+        serviceHomeTitle: 'Domestic Intelligence',
+        serviceHomeText: 'Lighting, comfort, and security that respond with subtle precision to the rhythm of your home.',
+        serviceBotTitle: 'JavaScript & TypeScript Automation',
+        serviceBotText: 'Tailored automations and digital assistants built with JavaScript and TypeScript to remove repetition and keep work moving smoothly.',
+        aboutTitle: 'Premium service, backed by engineering discipline.',
+        aboutDescription: 'We combine thoughtful design, dependable engineering, and hands-on support so every project feels calm, polished, and built to last.',
+        aboutCard1Title: 'Built around your space',
+        aboutCard1Text: 'Every installation is planned around how you use the space, what you value, and how you want it to feel.',
+        aboutCard2Title: 'Support that stays close',
+        aboutCard2Text: 'From first conversation to long after installation, we stay involved and responsive.',
+        aboutCard3Title: 'Crafted with restraint',
+        aboutCard3Text: 'The experience is as considered as the systems themselves — refined, dependable, and quietly ahead of what’s expected.',
+        ctaHeading: 'Let’s make your space feel sharper, calmer, and more alive.',
+        ctaDescription: 'Whether you want stronger security, a more effortless home, or smarter day-to-day operations, Zencron brings clarity, precision, and real comfort to the process.',
+        ctaButton: 'Start Your Project',
+        contactHeading: 'Tell us what you want to simplify, secure, or elevate.',
+        contactDescription: 'From first conversation to final installation, we keep the process clear, calm, and carefully tailored.',
+        contactAddress: '1/203 Naidu Street, Chettinaayanpatti, Dindigul, Tamil Nadu 624004',
+        contactPhone: '+91 6385285597',
+        contactEmail: 'zencronautomation.help@gmail.com'
+      };
+
+      const fields = Object.keys(defaultContent);
+      const elementMap = {
+        heroBadge: 'heroBadge',
+        heroTitle: 'heroTitle',
+        heroDescription: 'heroDescription',
+        heroImage: 'heroImage',
+        heroPrimary: 'heroPrimary',
+        heroSecondary: 'heroSecondary',
+        heroPill1: 'heroPill1',
+        servicesLabel: 'servicesLabel',
+        servicesTitle: 'servicesTitle',
+        servicesDescription: 'servicesDescription',
+        footerText: 'footerText',
+        footerLinkHome: 'footerLinkHome',
+        footerLinkServices: 'footerLinkServices',
+        footerLinkContact: 'footerLinkContact',
+        heroPill2: 'heroPill2',
+        heroPill3: 'heroPill3',
+        serviceCctvTitle: 'serviceCctvTitle',
+        serviceCctvText: 'serviceCctvText',
+        serviceHomeTitle: 'serviceHomeTitle',
+        serviceHomeText: 'serviceHomeText',
+        serviceBotTitle: 'serviceBotTitle',
+        serviceBotText: 'serviceBotText',
+        aboutTitle: 'aboutTitle',
+        aboutDescription: 'aboutDescription',
+        aboutImage: 'aboutImage',
+        aboutCard1Title: 'aboutCard1Title',
+        aboutCard1Text: 'aboutCard1Text',
+        aboutCard2Title: 'aboutCard2Title',
+        aboutCard2Text: 'aboutCard2Text',
+        aboutCard3Title: 'aboutCard3Title',
+        aboutCard3Text: 'aboutCard3Text',
+        ctaHeading: 'ctaHeading',
+        ctaDescription: 'ctaDescription',
+        ctaButton: 'ctaButton',
+        contactHeading: 'contactHeading',
+        contactDescription: 'contactDescription',
+        contactAddress: 'contactAddress',
+        contactPhone: 'contactPhone',
+        contactEmail: 'contactEmail'
+      };
+
+      const updatePreview = () => {
+        const data = {};
+        fields.forEach((field) => {
+          const input = document.getElementById(elementMap[field]);
+          data[field] = input ? input.value : defaultContent[field];
+        });
+        document.getElementById('previewBadge').textContent = data.heroBadge || 'Preview';
+        document.getElementById('previewTitle').textContent = data.heroTitle || 'Preview title';
+        document.getElementById('previewDescription').textContent = data.heroDescription || 'Preview description';
+      };
+
+      const loadContent = () => {
+        const saved = localStorage.getItem(storageKey);
+        const data = saved ? { ...defaultContent, ...JSON.parse(saved) } : defaultContent;
+        Object.entries(elementMap).forEach(([key, id]) => {
+          const el = document.getElementById(id);
+          if (el) el.value = data[key] || '';
+        });
+        updatePreview();
+      };
+
+      const saveContent = () => {
+        const data = {};
+        fields.forEach((field) => {
+          const input = document.getElementById(elementMap[field]);
+          data[field] = input ? input.value : defaultContent[field];
+        });
+        localStorage.setItem(storageKey, JSON.stringify(data));
+        window.dispatchEvent(new Event('storage'));
+        alert('Content updated successfully.');
+      };
+
+      document.querySelectorAll('input, textarea').forEach((el) => {
+        el.addEventListener('input', updatePreview);
+      });
+
+      document.getElementById('saveBtn').addEventListener('click', saveContent);
+      document.getElementById('resetBtn').addEventListener('click', () => {
+        localStorage.removeItem(storageKey);
+        loadContent();
+        alert('Content reset to default.');
+      });
+
+      const password = 'zencron2026';
+      document.getElementById('loginBtn').addEventListener('click', () => {
+        const entered = document.getElementById('passwordInput').value;
+        if (entered === password) {
+          document.getElementById('loginScreen').classList.add('hidden');
+          document.getElementById('appScreen').classList.remove('hidden');
+          document.getElementById('previewPanel').classList.remove('hidden');
+          loadContent();
+        } else {
+          document.getElementById('loginError').classList.remove('hidden');
+        }
+      });
+
+      loadContent();
+    </script>
+  </body>
+</html>
