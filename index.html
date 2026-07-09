@@ -671,55 +671,59 @@
       contactEmail: 'zencronautomation.help@gmail.com'
     };
 
-    const applySiteContent = () => {
-      const saved = localStorage.getItem(contentStorageKey);
-      const data = saved ? { ...defaultContent, ...JSON.parse(saved) } : defaultContent;
-      const setText = (id, value) => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = value;
-      };
+    const applySiteContent = async () => {
+      try {
+        const response = await fetch('/.netlify/functions/content');
+        const data = response.ok ? await response.json() : defaultContent;
+        const setText = (id, value) => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = value;
+        };
 
-      setText('hero-badge', data.heroBadge);
-      setText('hero-title', data.heroTitle);
-      setText('hero-description', data.heroDescription);
-      setText('services-label', data.servicesLabel);
-      setText('services-title', data.servicesTitle);
-      setText('services-description', data.servicesDescription);
-      setText('footer-text', data.footerText);
-      setText('footer-link-home', data.footerLinkHome);
-      setText('footer-link-services', data.footerLinkServices);
-      setText('footer-link-contact', data.footerLinkContact);
-      const heroImageEl = document.getElementById('hero-image');
-      if (heroImageEl && data.heroImage) heroImageEl.src = data.heroImage;
-      const aboutImageEl = document.getElementById('about-image');
-      if (aboutImageEl && data.aboutImage) aboutImageEl.src = data.aboutImage;
-      setText('hero-cta-primary', data.heroPrimary);
-      setText('hero-cta-secondary', data.heroSecondary);
-      setText('hero-pill-1', data.heroPills[0] || '');
-      setText('hero-pill-2', data.heroPills[1] || '');
-      setText('hero-pill-3', data.heroPills[2] || '');
-      setText('service-cctv-title', data.serviceCctvTitle);
-      setText('service-cctv-text', data.serviceCctvText);
-      setText('service-home-title', data.serviceHomeTitle);
-      setText('service-home-text', data.serviceHomeText);
-      setText('service-bot-title', data.serviceBotTitle);
-      setText('service-bot-text', data.serviceBotText);
-      setText('about-title', data.aboutTitle);
-      setText('about-description', data.aboutDescription);
-      setText('about-card-1-title', data.aboutCard1Title);
-      setText('about-card-1-text', data.aboutCard1Text);
-      setText('about-card-2-title', data.aboutCard2Title);
-      setText('about-card-2-text', data.aboutCard2Text);
-      setText('about-card-3-title', data.aboutCard3Title);
-      setText('about-card-3-text', data.aboutCard3Text);
-      setText('cta-heading', data.ctaHeading);
-      setText('cta-description', data.ctaDescription);
-      setText('cta-button', data.ctaButton);
-      setText('contact-heading', data.contactHeading);
-      setText('contact-description', data.contactDescription);
-      setText('contact-address', data.contactAddress);
-      setText('contact-phone', data.contactPhone);
-      setText('contact-email', data.contactEmail);
+        setText('hero-badge', data.heroBadge);
+        setText('hero-title', data.heroTitle);
+        setText('hero-description', data.heroDescription);
+        setText('services-label', data.servicesLabel);
+        setText('services-title', data.servicesTitle);
+        setText('services-description', data.servicesDescription);
+        setText('footer-text', data.footerText || defaultContent.footerText);
+        setText('footer-link-home', data.footerLinkHome || defaultContent.footerLinkHome);
+        setText('footer-link-services', data.footerLinkServices || defaultContent.footerLinkServices);
+        setText('footer-link-contact', data.footerLinkContact || defaultContent.footerLinkContact);
+        const heroImageEl = document.getElementById('hero-image');
+        if (heroImageEl && data.heroImage) heroImageEl.src = data.heroImage;
+        const aboutImageEl = document.getElementById('about-image');
+        if (aboutImageEl && data.aboutImage) aboutImageEl.src = data.aboutImage;
+        setText('hero-cta-primary', data.heroPrimary);
+        setText('hero-cta-secondary', data.heroSecondary);
+        setText('hero-pill-1', data.heroPill1 || '');
+        setText('hero-pill-2', data.heroPill2 || '');
+        setText('hero-pill-3', data.heroPill3 || '');
+        setText('service-cctv-title', data.serviceCctvTitle);
+        setText('service-cctv-text', data.serviceCctvText);
+        setText('service-home-title', data.serviceHomeTitle);
+        setText('service-home-text', data.serviceHomeText);
+        setText('service-bot-title', data.serviceBotTitle);
+        setText('service-bot-text', data.serviceBotText);
+        setText('about-title', data.aboutTitle);
+        setText('about-description', data.aboutDescription);
+        setText('about-card-1-title', data.aboutCard1Title);
+        setText('about-card-1-text', data.aboutCard1Text);
+        setText('about-card-2-title', data.aboutCard2Title);
+        setText('about-card-2-text', data.aboutCard2Text);
+        setText('about-card-3-title', data.aboutCard3Title);
+        setText('about-card-3-text', data.aboutCard3Text);
+        setText('cta-heading', data.ctaHeading);
+        setText('cta-description', data.ctaDescription);
+        setText('cta-button', data.ctaButton);
+        setText('contact-heading', data.contactHeading);
+        setText('contact-description', data.contactDescription);
+        setText('contact-address', data.contactAddress);
+        setText('contact-phone', data.contactPhone);
+        setText('contact-email', data.contactEmail);
+      } catch (error) {
+        console.error('Error applying site content:', error);
+      }
     };
 
     const revealOnScroll = () => {
