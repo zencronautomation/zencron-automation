@@ -3,287 +3,234 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ZENCRON - Automation Solutions</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com "></script>
+  <title>Zencron Automation | Thoughtful Systems That Feel Effortless</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <!-- Custom Animations -->
-  <style>
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes pulseSlow {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-    .animate-fadeInUp {
-      animation: fadeInUp 0.6s ease-out forwards;
-    }
-    .animate-pulse-slow {
-      animation: pulseSlow 3s infinite;
-    }
-    .hover\:animate-pulse:hover {
-      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-12px); }
-    }
-    @keyframes shimmer {
-      0% { background-position: -200% 0; }
-      100% { background-position: 200% 0; }
-    }
-  </style>
   <style>
     :root {
-      --bg-primary: #020617;
-      --bg-secondary: rgba(2, 6, 23, 0.9);
-      --bg-card: rgba(15, 23, 42, 0.9);
-      --accent: #38bdf8;
-      --accent-strong: #0ea5e9;
-      --text-main: #f8fafc;
-      --text-muted: #cbd5e1;
+      --bg-1: #000000;
+      --bg-2: #06070d;
+      --bg-3: #090b12;
+      --accent: #67e8f9;
+      --accent-2: #2563eb;
+      --accent-soft: rgba(103, 232, 249, 0.16);
+      --text-main: #f8f5eb;
+      --text-soft: #c8bdab;
+      --panel: rgba(10, 10, 14, 0.82);
+      --line: rgba(103, 232, 249, 0.2);
+      --bg-angle: 135deg;
+      --bg-shift: 0px;
     }
 
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
+      margin: 0;
       font-family: 'Inter', 'Segoe UI', sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(56, 189, 248, 0.16), transparent 22%),
-        radial-gradient(circle at bottom right, rgba(37, 99, 235, 0.16), transparent 24%),
-        linear-gradient(135deg, #020617 0%, #07111f 35%, #111827 100%);
       color: var(--text-main);
+      background: #000;
       min-height: 100vh;
+      overflow-x: hidden;
+      letter-spacing: 0.01em;
     }
 
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: linear-gradient(120deg, rgba(56, 189, 248, 0.06), transparent 30%, rgba(14, 165, 233, 0.08));
-      pointer-events: none;
-      z-index: -1;
-    }
-
+    body::before,
     body::after {
       content: '';
       position: fixed;
       inset: 0;
-      background-image: linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
-      background-size: 38px 38px;
-      mask-image: linear-gradient(180deg, rgba(0,0,0,0.4), transparent);
       pointer-events: none;
       z-index: -1;
     }
 
-    header,
-    .bg-white,
-    .bg-gray-50,
-    .bg-gray-800,
-    .bg-slate-900,
-    .bg-slate-950,
-    .bg-slate-800 {
-      background-color: var(--bg-secondary) !important;
-      backdrop-filter: blur(16px);
+    body::before {
+      background:
+        radial-gradient(circle at 10% 15%, rgba(103, 232, 249, 0.16), transparent 22%),
+        radial-gradient(circle at 85% 20%, rgba(37, 99, 235, 0.18), transparent 22%),
+        radial-gradient(circle at 50% 90%, rgba(255,255,255,0.06), transparent 30%),
+        linear-gradient(var(--bg-angle), rgba(2,6,23,0.98), rgba(8,15,30,0.98) 45%, rgba(0,0,0,1));
     }
 
-    header {
-      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    body::after {
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.75), transparent 92%);
+      transform: translateY(calc(var(--bg-shift) * -0.3));
+      opacity: 0.55;
     }
 
-    section {
-      position: relative;
-    }
-
-    .bg-blue-600,
-    .bg-blue-700,
-    .bg-cyan-600 {
-      background: linear-gradient(135deg, var(--accent), var(--accent-strong)) !important;
-      border: 1px solid rgba(125, 211, 252, 0.3) !important;
-      box-shadow: 0 12px 30px rgba(14, 165, 233, 0.25) !important;
-    }
-
-    .btn-primary,
-    .btn-secondary {
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      border-radius: 999px;
-      letter-spacing: 0.02em;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-      color: white;
-      box-shadow: 0 15px 35px rgba(14, 165, 233, 0.25);
-    }
-
-    .btn-primary::before,
-    .btn-secondary::before {
-      content: '';
-      position: absolute;
+    #bg-canvas {
+      position: fixed;
       inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.24), transparent);
-      transform: translateX(-100%);
-      transition: transform 0.6s ease;
-    }
-
-    .btn-primary:hover::before,
-    .btn-secondary:hover::before {
-      transform: translateX(100%);
-    }
-
-    .btn-primary:hover,
-    .btn-secondary:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 18px 40px rgba(14, 165, 233, 0.3);
-    }
-
-    .btn-secondary {
-      background: rgba(2, 6, 23, 0.65);
-      color: var(--accent);
-      border: 1px solid rgba(125, 211, 252, 0.25);
-      backdrop-filter: blur(8px);
-    }
-
-    .hero-shell {
-      position: relative;
-      padding: 2rem;
-      border-radius: 2rem;
-      background: rgba(2, 6, 23, 0.72);
-      border: 1px solid rgba(125, 211, 252, 0.18);
-      box-shadow: 0 24px 60px rgba(2, 8, 23, 0.45);
-      overflow: hidden;
-    }
-
-    .hero-shell::before {
-      content: '';
-      position: absolute;
-      inset: -45% 40% auto auto;
-      width: 220px;
-      height: 220px;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.3), transparent 70%);
-      filter: blur(12px);
-      animation: float 5s ease-in-out infinite;
-    }
-
-    .hero-grid {
-      position: absolute;
-      inset: 0;
-      background-image: linear-gradient(rgba(125, 211, 252, 0.09) 1px, transparent 1px), linear-gradient(90deg, rgba(125, 211, 252, 0.09) 1px, transparent 1px);
-      background-size: 34px 34px;
-      opacity: 0.3;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
       pointer-events: none;
+      opacity: 0.95;
+    }
+
+    .aurora {
+      position: fixed;
+      inset: -20% -10% auto auto;
+      width: 40rem;
+      height: 40rem;
+      background: radial-gradient(circle, rgba(103, 232, 249, 0.2), transparent 65%);
+      filter: blur(80px);
+      opacity: 0.75;
+      transform: translate3d(0, calc(var(--bg-shift) * 0.2px), 0);
+      animation: drift 18s ease-in-out infinite alternate;
+      z-index: -1;
+    }
+
+    .aurora.two {
+      inset: auto auto -20% -8%;
+      width: 34rem;
+      height: 34rem;
+      background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 65%);
+      animation-duration: 22s;
+    }
+
+    .glass-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: 0 25px 90px rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(24px);
+      position: relative;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, rgba(103, 232, 249, 0.1), rgba(255,255,255,0.03));
+      border: 1px solid rgba(103, 232, 249, 0.18);
+    }
+
+    .section-glow {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-glow::before {
+      content: '';
+      position: absolute;
+      inset: -20% auto auto -10%;
+      width: 24rem;
+      height: 24rem;
+      background: radial-gradient(circle, rgba(103, 232, 249, 0.14), transparent 70%);
+      pointer-events: none;
+      filter: blur(34px);
+    }
+
+    .process-card {
+      position: relative;
+      border: 1px solid rgba(103, 232, 249, 0.16);
+      background: rgba(255,255,255,0.03);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .tag-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(103, 232, 249, 0.11);
+      border: 1px solid rgba(103, 232, 249, 0.18);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
     .hero-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.55rem 0.9rem;
+      gap: 0.55rem;
+      padding: 0.7rem 1rem;
       border-radius: 999px;
-      background: rgba(56, 189, 248, 0.12);
-      border: 1px solid rgba(56, 189, 248, 0.25);
+      border: 1px solid rgba(103, 232, 249, 0.24);
+      background: rgba(103, 232, 249, 0.08);
       color: var(--accent);
-      font-size: 0.8rem;
-      font-weight: 600;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      backdrop-filter: blur(8px);
-    }
-
-    .floating-orb {
-      position: absolute;
-      border-radius: 999px;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.35), transparent 70%);
-      filter: blur(8px);
-      animation: float 6s ease-in-out infinite;
-    }
-
-    .glass-card {
-      background: rgba(2, 6, 23, 0.72);
-      border: 1px solid rgba(125, 211, 252, 0.17);
-      box-shadow: 0 18px 45px rgba(2, 8, 23, 0.4);
       backdrop-filter: blur(16px);
     }
 
-    .service-card,
-    .contact-card,
-    .info-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .particle {
-      position: absolute;
-      width: 6px;
-      height: 6px;
+    .button-primary,
+    .button-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 1.45rem;
       border-radius: 999px;
-      background: rgba(56, 189, 248, 0.9);
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
-      animation: float 6s ease-in-out infinite;
-      pointer-events: none;
+      font-weight: 600;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      text-decoration: none;
+      letter-spacing: 0.02em;
     }
 
-    .particle:nth-child(2n) {
-      animation-duration: 8s;
-      animation-delay: 1s;
+    .button-primary {
+      color: #07131b;
+      background: linear-gradient(135deg, #dffbff, var(--accent));
+      box-shadow: 0 16px 42px rgba(103, 232, 249, 0.2);
     }
 
-    .particle:nth-child(3n) {
-      animation-duration: 10s;
-      animation-delay: 2s;
+    .button-secondary {
+      color: var(--accent);
+      background: rgba(0,0,0,0.64);
+      border: 1px solid rgba(103, 232, 249, 0.2);
     }
 
-    .hero-motion {
-      animation: float 8s ease-in-out infinite;
+    .button-primary:hover,
+    .button-secondary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 48px rgba(103, 232, 249, 0.22);
     }
 
-    .service-card:hover,
-    .contact-card:hover,
-    .info-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 45px rgba(2, 8, 23, 0.45);
+    .card-hover {
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-4px);
+      border-color: rgba(103, 232, 249, 0.3);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.4);
     }
 
     .section-title {
-      position: relative;
       display: inline-block;
-      padding-bottom: 0.3rem;
+      position: relative;
+      font-size: clamp(1.8rem, 3vw, 2.45rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      line-height: 1.08;
     }
 
     .section-title::after {
       content: '';
       position: absolute;
       left: 0;
-      bottom: 0;
+      bottom: -0.45rem;
       width: 65%;
       height: 3px;
       border-radius: 999px;
       background: linear-gradient(90deg, var(--accent), transparent);
     }
 
-    .brand-glow {
-      position: relative;
-      display: inline-block;
-      text-shadow: 0 0 16px rgba(56, 189, 248, 0.28);
-      animation: glowPulse 3s ease-in-out infinite;
-    }
-
-    @keyframes glowPulse {
-      0%, 100% { text-shadow: 0 0 12px rgba(56, 189, 248, 0.22); }
-      50% { text-shadow: 0 0 22px rgba(56, 189, 248, 0.45); }
-    }
-
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
+      transform: translateY(22px);
       transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .hero-ambient {
+      animation: pulse-soft 5.3s ease-in-out infinite;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.03) inset;
     }
 
     .reveal.is-visible {
@@ -291,390 +238,316 @@
       transform: translateY(0);
     }
 
-    .feature-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 0.8rem;
+    .marquee {
+      overflow: hidden;
+      border: 1px solid rgba(212, 175, 55, 0.16);
       border-radius: 999px;
-      background: rgba(56, 189, 248, 0.12);
-      color: var(--accent);
-      font-size: 0.9rem;
-      font-weight: 600;
-      border: 1px solid rgba(56, 189, 248, 0.2);
+      background: rgba(255,255,255,0.03);
+      padding: 0.8rem 1rem;
+      margin-top: 1.4rem;
     }
 
-    .bg-white,
-    .bg-gray-50 {
-      background: var(--bg-card) !important;
-      border: 1px solid rgba(148, 163, 184, 0.16) !important;
+    .marquee-track {
+      display: inline-flex;
+      gap: 2rem;
+      white-space: nowrap;
+      animation: sweep 18s linear infinite;
+      color: var(--text-soft);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
     }
 
-    .text-gray-900,
-    .text-gray-800,
-    .text-gray-700,
-    .text-gray-600,
-    .text-gray-500,
-    .text-slate-700,
-    .text-slate-800,
-    .text-slate-900 {
-      color: var(--text-main) !important;
+
+    @keyframes sweep {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
     }
 
-    .text-gray-400,
-    .text-slate-400 {
-      color: var(--text-muted) !important;
+    @keyframes drift {
+      from { transform: translate3d(-2%, 0, 0) scale(1); }
+      to { transform: translate3d(6%, 5%, 0) scale(1.08); }
     }
 
-    .text-blue-600,
-    .text-blue-400,
-    .text-cyan-400 {
-      color: var(--accent) !important;
-    }
-
-    .border-gray-300,
-    .border-slate-700,
-    .border-slate-800 {
-      border-color: rgba(148, 163, 184, 0.22) !important;
-    }
-
-    .bg-blue-50,
-    .bg-blue-100 {
-      background-color: rgba(56, 189, 248, 0.16) !important;
-    }
-
-    .shadow-md,
-    .shadow-lg,
-    .shadow-xl,
-    .hover\:shadow-xl:hover {
-      box-shadow: 0 20px 45px rgba(2, 8, 23, 0.45) !important;
-    }
-
-    input,
-    textarea,
-    select {
-      background-color: rgba(2, 6, 23, 0.78) !important;
-      color: var(--text-main) !important;
-      border: 1px solid rgba(148, 163, 184, 0.25) !important;
-    }
-
-    a:hover {
-      color: var(--accent) !important;
-    }
-
-    img {
-      border: 1px solid rgba(125, 211, 252, 0.16);
+    @keyframes pulse-soft {
+      0%, 100% { transform: scale(1); opacity: 0.85; }
+      50% { transform: scale(1.04); opacity: 1; }
     }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100">
-  <!-- Header/Navigation -->
-  <header class="sticky top-0 z-50 bg-white shadow-md">
-    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-      <div class="flex items-center">
-        <div class="brand-glow text-2xl font-bold text-blue-600 transition-transform duration-300 hover:scale-110">ZENCRON Automation</div>
-      </div>
-      
-      <!-- Desktop Navigation -->
-      <nav class="hidden md:flex space-x-8">
-        <a href="#home" class="text-gray-700 hover:text-blue-600 transition-colors relative group">
-          <span class="capitalize">Home</span>
-          <span class="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
-        </a>
-        <a href="#services" class="text-gray-700 hover:text-blue-600 transition-colors relative group">
-          <span class="capitalize">Services</span>
-          <span class="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
-        </a>
-        <a href="#about" class="text-gray-700 hover:text-blue-600 transition-colors relative group">
-          <span class="capitalize">About</span>
-          <span class="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
-        </a>
-      </nav>
-      
-      <div class="hidden md:flex items-center space-x-4">
-        <a 
-          href="#contact" 
-          class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-        >
-          Contact Us
-        </a>
-      </div>
+<body>
+  <canvas id="bg-canvas"></canvas>
+  <div class="aurora"></div>
+  <div class="aurora two"></div>
 
-      <!-- Mobile menu button -->
-      <button 
-        class="md:hidden text-gray-700 focus:outline-none"
-        onclick="toggleMobileMenu()"
-        aria-label="Toggle menu"
-      >
-        <svg 
-          class="w-6 h-6 transition-transform duration-300" 
-          fill="none" 
-          stroke="currentColor" 
-          viewBox="0 0 24 24"
-          id="mobile-menu-icon"
-        >
-          <path 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            strokeWidth="2" 
-            d="M4 6h16M4 12h16M4 18h16"
-          ></path>
-        </svg>
-      </button>
+  <header class="sticky top-0 z-50 border-b border-white/10" style="background: rgba(4, 4, 7, 0.78); backdrop-filter: blur(24px);">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="#home" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full border border-amber-400/30 bg-gradient-to-br from-amber-400/20 to-white/5 flex items-center justify-center">
+          <div class="w-5 h-5 rounded-full border border-amber-300/70"></div>
+        </div>
+        <div class="leading-none">
+          <span class="block text-sm font-semibold tracking-[0.25em] text-white uppercase">Zencron</span>
+          <span class="block text-[0.65rem] tracking-[0.3em] text-stone-400 uppercase">Automation</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm text-stone-300">
+        <a href="#services" class="hover:text-amber-300 transition">Services</a>
+        <a href="#about" class="hover:text-amber-300 transition">About</a>
+        <a href="#contact" class="hover:text-amber-300 transition">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="#contact" class="button-secondary hidden md:inline-flex">Book a Consultation</a>
+        <button id="menu-toggle" class="md:hidden w-11 h-11 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white" aria-label="Toggle mobile menu">
+          <svg id="menu-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
     </div>
-    
-    <!-- Mobile Navigation -->
-    <div 
-      id="mobile-menu"
-      class="hidden md:hidden bg-white shadow-lg"
-    >
-      <div class="px-4 pt-2 pb-4 space-y-3">
-        <a href="#home" onclick="toggleMobileMenu()" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors duration-300">Home</a>
-        <a href="#services" onclick="toggleMobileMenu()" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors duration-300">Services</a>
-        <a href="#about" onclick="toggleMobileMenu()" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors duration-300">About</a>
-        <a href="#contact" onclick="toggleMobileMenu()" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors duration-300">Contact</a>
-        <a 
-          href="#contact" 
-          onclick="toggleMobileMenu()"
-          class="block px-4 py-2 text-center bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
-        >
-          Contact Us
-        </a>
+
+    <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-black/95 backdrop-blur-xl">
+      <div class="container mx-auto px-4 py-4 space-y-3 text-sm text-stone-300">
+        <a href="#services" class="block rounded-2xl border border-white/10 px-4 py-3 hover:border-amber-400/30 hover:text-amber-300 transition">Services</a>
+        <a href="#about" class="block rounded-2xl border border-white/10 px-4 py-3 hover:border-amber-400/30 hover:text-amber-300 transition">About</a>
+        <a href="#contact" class="block rounded-2xl border border-white/10 px-4 py-3 hover:border-amber-400/30 hover:text-amber-300 transition">Contact</a>
+        <a href="#contact" class="button-primary mt-2 w-full">Book a Consultation</a>
       </div>
     </div>
   </header>
 
-  <main>
-    <!-- Hero Section -->
-    <section id="home" class="relative py-24 overflow-hidden">
-      <div class="hero-grid"></div>
-      <div class="particle top-12 left-10"></div>
-      <div class="particle top-24 right-20"></div>
-      <div class="particle bottom-20 left-1/4"></div>
-      <div class="particle bottom-10 right-1/3"></div>
-      <div class="floating-orb w-72 h-72 top-8 left-0"></div>
-      <div class="floating-orb w-48 h-48 bottom-6 right-10" style="animation-delay: 1.2s;"></div>
-      <div class="container mx-auto px-4 relative z-10">
-        <div class="hero-shell flex flex-col md:flex-row items-center gap-10">
-          <div class="md:w-1/2 mb-8 md:mb-0 relative">
-            <div class="hero-badge mb-6 animate-fadeInUp">
-              <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
-              Smart automation • Secure living • Future-ready
+  <main id="home">
+    <section class="relative min-h-[94vh] flex items-center overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(212,175,55,0.11),transparent_25%)]"></div>
+      </div>
+      <div class="container mx-auto px-4 py-24 lg:py-28 relative z-10">
+        <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 items-center">
+          <div class="reveal">
+            <div class="hero-badge mb-6" id="hero-badge">JavaScript • TypeScript • Designed to feel effortless</div>
+            <h1 class="text-4xl md:text-6xl font-black leading-[0.95] mb-6 tracking-tight" id="hero-title">The kind of experience people notice the moment they step in.</h1>
+            <p class="text-lg md:text-xl text-stone-300 max-w-2xl mb-8" id="hero-description">We create intelligent spaces that feel calm, private, and beautifully in sync with daily life — from secure environments to custom automations that quietly do the heavy lifting.</p>
+            <div class="flex flex-col sm:flex-row gap-4 mb-8">
+              <a href="#contact" class="button-primary" id="hero-cta-primary">Book a Private Consultation</a>
+              <a href="#services" class="button-secondary" id="hero-cta-secondary">See What We Build</a>
             </div>
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight animate-fadeInUp">
-              Automation Solutions for a Smarter Future
-            </h1>
-            <p class="text-xl text-slate-300 mb-8 animate-fadeInUp" style="animation-delay: 200ms;">
-              Expert installation and service for CCTV systems, home automation, and bot development across major platforms.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 animate-fadeInUp" style="animation-delay: 400ms;">
-              <a 
-                href="#contact" 
-                class="btn-primary px-8 py-4 text-center group"
-              >
-                <span class="group-hover:animate-pulse">Get in Touch</span>
-              </a>
-              <a 
-                href="#services" 
-                class="btn-secondary px-8 py-4 text-center"
-              >
-                Explore Services
-              </a>
-            </div>
-            <div class="flex flex-wrap gap-3 mt-8 animate-fadeInUp" style="animation-delay: 500ms;">
-              <div class="feature-pill">24/7 Support</div>
-              <div class="feature-pill">Custom Installations</div>
-              <div class="feature-pill">Smart Control</div>
+            <div class="flex flex-wrap gap-3">
+              <div class="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm text-stone-300" id="hero-pill-1">Private by design</div>
+              <div class="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm text-stone-300" id="hero-pill-2">Built for everyday ease</div>
+              <div class="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm text-stone-300" id="hero-pill-3">Crafted with JavaScript & TypeScript</div>
             </div>
           </div>
-          <div class="md:w-1/2 relative">
-            <div class="absolute inset-0 rounded-[2rem] border border-cyan-400/20 animate-pulse-slow"></div>
-            <div class="relative glass-card p-3 rounded-[2rem] hero-motion">
-              <img 
-                src="img no 1.jpg" 
-                alt="Automation technology" 
-                class="relative rounded-[1.5rem] shadow-2xl w-full transition-transform duration-500 hover:scale-105"
-              />
+
+          <div class="reveal">
+            <div class="glass-panel rounded-[2rem] p-4 md:p-6 relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-amber-400/10 via-transparent to-white/5"></div>
+              <img id="hero-image" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80" alt="High-end automation technology" class="w-full rounded-[1.35rem] object-cover h-[430px] hero-ambient" />
+              <div class="absolute inset-x-6 bottom-6 rounded-[1.2rem] border border-white/10 bg-black/55 p-4 backdrop-blur-xl">
+                <div class="flex items-center justify-between text-sm text-stone-300">
+                  <span>Experience tuned in real time</span>
+                  <span class="text-cyan-300 font-semibold">Live</span>
+                </div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <span class="rounded-full bg-cyan-400/10 px-3 py-1 text-xs text-cyan-300">Secure monitoring</span>
+                  <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-stone-300">Effortless control</span>
+                </div>
+              </div>
+              <div class="absolute bottom-6 left-6 right-6 glass-panel rounded-[1.2rem] p-4">
+                <div class="flex items-center justify-between text-sm text-stone-300">
+                  <span>Experience tuned in real time</span>
+                  <span class="text-amber-300 font-semibold">Live</span>
+                </div>
+                <div class="mt-3 flex gap-2 flex-wrap">
+                  <span class="rounded-full bg-amber-400/10 px-3 py-1 text-xs text-amber-300">Secure monitoring</span>
+                  <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-stone-300">Effortless control</span>
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4 mt-10">
+          <div class="reveal glass-panel rounded-[1.2rem] p-5">
+            <p class="text-cyan-300 text-sm font-semibold uppercase tracking-[0.2em] mb-2">01 / Quietly powerful</p>
+            <h3 class="text-lg font-semibold mb-2">Technology that feels invisible until you need it.</h3>
+            <p class="text-stone-300 text-sm">Every detail is designed to feel natural, fast, and dependable.</p>
+          </div>
+          <div class="reveal glass-panel rounded-[1.2rem] p-5">
+            <p class="text-cyan-300 text-sm font-semibold uppercase tracking-[0.2em] mb-2">02 / Built around you</p>
+            <h3 class="text-lg font-semibold mb-2">Nothing generic, nothing rushed, nothing off the shelf.</h3>
+            <p class="text-stone-300 text-sm">Systems are shaped around your routine, your priorities, and your pace.</p>
+          </div>
+          <div class="reveal glass-panel rounded-[1.2rem] p-5">
+            <p class="text-cyan-300 text-sm font-semibold uppercase tracking-[0.2em] mb-2">03 / Made to last</p>
+            <h3 class="text-lg font-semibold mb-2">A calm experience that keeps getting better over time.</h3>
+            <p class="text-stone-300 text-sm">Thoughtful installation and long-term support keep things feeling effortless.</p>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-6 mt-8">
+          <div class="reveal glass-panel rounded-[1.6rem] p-8 stat-card">
+            <p class="text-cyan-300 font-semibold uppercase tracking-[0.2em] text-sm mb-3">Why it feels different</p>
+            <h3 class="text-2xl font-bold mb-4">A more human experience, built into every layer.</h3>
+            <p class="text-stone-300 mb-6">We combine thoughtful design, reliable engineering, and long-term care so the result feels simple from the start.</p>
+            <div class="grid sm:grid-cols-3 gap-4">
+              <div class="rounded-2xl border border-white/10 bg-black/40 p-4">
+                <div class="text-2xl font-bold text-white">150+</div>
+                <p class="text-sm text-stone-400 mt-1">custom solutions</p>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-black/40 p-4">
+                <div class="text-2xl font-bold text-white">24/7</div>
+                <p class="text-sm text-stone-400 mt-1">ongoing support</p>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-black/40 p-4">
+                <div class="text-2xl font-bold text-white">100%</div>
+                <p class="text-sm text-stone-400 mt-1">tailored installs</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal glass-panel rounded-[1.6rem] p-8">
+            <div class="absolute inset-0 rounded-[1.6rem] bg-gradient-to-br from-cyan-400/10 via-transparent to-transparent pointer-events-none"></div>
+            <p class="text-cyan-300 font-semibold uppercase tracking-[0.2em] text-sm mb-3 relative z-10">Client perspective</p>
+            <blockquote class="text-xl leading-8 text-stone-200 relative z-10">“It didn’t feel like a system being installed. It felt like the space finally became easier to live in.”</blockquote>
+            <div class="mt-6 flex items-center gap-3">
+              <div class="w-12 h-12 rounded-full border border-cyan-400/30 bg-cyan-400/10 flex items-center justify-center text-sm font-semibold text-cyan-200">Z</div>
+              <div>
+                <p class="font-semibold text-white">Private residence client</p>
+                <p class="text-sm text-stone-400">Residential automation project</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal marquee mt-10">
+          <div class="marquee-track">
+            <span>CCTV Intelligence</span>
+            <span>Smart Home Systems</span>
+            <span>Bot Automation</span>
+            <span>Secure Infrastructure</span>
+            <span>CCTV Intelligence</span>
+            <span>Smart Home Systems</span>
+            <span>Bot Automation</span>
+            <span>Secure Infrastructure</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-20 bg-white">
+    <section id="services" class="py-20">
       <div class="container mx-auto px-4">
-        <div class="reveal text-center mb-16 animate-fadeInUp">
-          <h2 class="section-title text-3xl md:text-4xl font-bold text-white mb-4">Our Services</h2>
-          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-            We offer comprehensive automation solutions tailored to your specific needs
-          </p>
+        <div class="reveal mb-12 max-w-3xl">
+            <p class="text-amber-300 font-semibold uppercase tracking-[0.2em] text-sm mb-3" id="services-label">Core services</p>
+          <h2 class="section-title" id="services-title">Precision solutions for modern spaces.</h2>
+          <p class="text-stone-300 text-lg" id="services-description">Every installation is shaped around the way you live, work, and protect what matters most.</p>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-10">
-          <!-- Service 1 -->
-          <div class="reveal glass-card service-card rounded-2xl p-8 shadow-lg transition-all duration-500 transform translate-y-10 opacity-0" id="service1">
-            <a href="cctv-service.html" target="_blank" rel="noopener noreferrer" class="w-16 h-16 bg-blue-100 rounded-full inline-flex items-center justify-center mb-6 transition-transform duration-300 hover:scale-110" aria-label="Open CCTV service page">
-              <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.556-2.278A1 1 0 0121 8.618v6.764a1 1 0 01-1.444.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-              </svg>
-            </a>
-            <h3 class="text-xl font-bold text-gray-900 mb-4">CCTV Camera Installation & Service</h3>
-            <p class="text-gray-600 mb-6">
-              Professional installation, maintenance, and repair of CCTV systems to keep your property secure. We work with the latest technology to provide high-quality surveillance solutions.
-            </p>
-            <ul class="space-y-3">
-              <li class="flex items-center animate-fadeInUp" style="animation-delay: 300ms;">
-                <svg class="w-5 h-5 text-blue-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
-                </svg>
-                <span>24/7 security monitoring</span>
-              </li>
-              <li class="flex items-center animate-fadeInUp" style="animation-delay: 400ms;">
-                <svg class="w-5 h-5 text-blue-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
-                </svg>
-                <span>HD video quality</span>
-              </li>
-              <li class="flex items-center animate-fadeInUp" style="animation-delay: 500ms;">
-                <svg class="w-5 h-5 text-blue-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
-                </svg>
-                <span>Remote access capabilities</span>
-              </li>
-            </ul>
+        <div class="grid md:grid-cols-3 gap-6">
+          <a href="cctv-service.html" target="_blank" rel="noopener noreferrer" class="reveal glass-panel rounded-[1.5rem] p-8 card-hover">
+            <div class="w-14 h-14 rounded-2xl border border-amber-400/20 bg-amber-400/10 flex items-center justify-center mb-5">
+              <svg class="w-7 h-7 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 10l4.556-2.278A1 1 0 0121 8.618v6.764a1 1 0 01-1.444.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-3" id="service-cctv-title">Private Surveillance</h3>
+            <p class="text-stone-300" id="service-cctv-text">Clear, reliable monitoring designed to keep watch without making the space feel overbuilt.</p>
+          </a>
+
+          <a href="home-automation.html" target="_blank" rel="noopener noreferrer" class="reveal glass-panel rounded-[1.5rem] p-8 card-hover">
+            <div class="w-14 h-14 rounded-2xl border border-amber-400/20 bg-amber-400/10 flex items-center justify-center mb-5">
+              <svg class="w-7 h-7 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-3" id="service-home-title">Domestic Intelligence</h3>
+            <p class="text-stone-300" id="service-home-text">Lighting, comfort, and security that respond with subtle precision to the rhythm of your home.</p>
+          </a>
+
+          <a href="bot-automation.html" target="_blank" rel="noopener noreferrer" class="reveal glass-panel rounded-[1.5rem] p-8 card-hover">
+            <div class="w-14 h-14 rounded-2xl border border-amber-400/20 bg-amber-400/10 flex items-center justify-center mb-5">
+              <svg class="w-7 h-7 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-3" id="service-bot-title">JavaScript & TypeScript Automation</h3>
+            <p class="text-stone-300" id="service-bot-text">Tailored automations and digital assistants built with JavaScript and TypeScript to remove repetition and keep work moving smoothly.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="approach" class="py-20">
+      <div class="container mx-auto px-4">
+        <div class="reveal mb-10 max-w-3xl">
+          <p class="text-cyan-300 font-semibold uppercase tracking-[0.2em] text-sm mb-3">Signature approach</p>
+          <h2 class="section-title">A sharper way to experience intelligent spaces.</h2>
+          <p class="text-stone-300 text-lg">We design each installation to feel intuitive, calm, and effortlessly in control — from the first idea to the final interaction.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-[0.95fr_1.05fr] gap-6">
+          <div class="reveal space-y-4">
+            <div class="process-card rounded-[1.4rem] p-6">
+              <div class="tag-pill mb-4">01 / Discover</div>
+              <h3 class="text-xl font-semibold mb-2">We understand your rhythm before we shape the system.</h3>
+              <p class="text-stone-300">Every project begins with listening closely to how you live, work, and protect what matters most.</p>
+            </div>
+            <div class="process-card rounded-[1.4rem] p-6">
+              <div class="tag-pill mb-4">02 / Design</div>
+              <h3 class="text-xl font-semibold mb-2">We build around your space, not around templates.</h3>
+              <p class="text-stone-300">The result is thoughtful automation that feels seamless, practical, and beautifully restrained.</p>
+            </div>
+            <div class="process-card rounded-[1.4rem] p-6">
+              <div class="tag-pill mb-4">03 / Refine</div>
+              <h3 class="text-xl font-semibold mb-2">We stay involved so the experience keeps improving.</h3>
+              <p class="text-stone-300">From setup to long-term support, our job is to keep the entire experience calm and dependable.</p>
+            </div>
           </div>
 
-          <!-- Service 2 -->
-          <div class="reveal glass-card service-card rounded-2xl p-8 shadow-lg transition-all duration-500 transform translate-y-10 opacity-0" id="service2">
-            <a href="home-automation.html" target="_blank" rel="noopener noreferrer" class="w-16 h-16 bg-blue-100 rounded-full inline-flex items-center justify-center mb-6 transition-transform duration-300 hover:scale-110" aria-label="Open home automation page">
-              <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-              </svg>
-            </a>
-            <h3 class="text-xl font-bold text-gray-900 mb-4">Home Automation</h3>
-            <p class="text-gray-600 mb-6">
-              Transform your living space with our smart home solutions. Control lighting, temperature, security, and entertainment systems from your smartphone or voice assistant.
-            </p>
-            <ul class="space-y-3">
-              <li class="flex items-center animate-fadeInUp" style="animation-delay: 400ms;">
-                <svg class="w-5 h-5 text-blue-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
-                </svg>
-                <span>Smart lighting control</span>
-              </li>
-              <li class="flex items-center animate-fadeInUp" style="animation-delay: 500ms;">
-                <svg class="w-5 h-5 text-blue-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
-                </svg>
-                <span>Home & Industrial Gate Automation</span>
-              </li>
-              <li class="flex items-center animate-fadeInUp" style="animation-delay: 600ms;">
-                <svg class="w-5 h-5 text-blue-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
-                </svg>
-                <span>Custom Pergola Installation</span>
-              </li>
-              <li class="flex items-center animate-fadeInUp" style="animation-delay: 600ms;">
-                <svg class="w-5 h-5 text-blue-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
-                </svg>
-                <span>Voice assistant compatibility</span>
-            </ul>
-          </div>
-
-          <!-- Service 3 -->
-          <div class="reveal glass-card service-card rounded-2xl p-8 shadow-lg transition-all duration-500 transform translate-y-10 opacity-0" id="service3">
-            <a href="bot-automation.html" target="_blank" rel="noopener noreferrer" class="w-16 h-16 bg-blue-100 rounded-full inline-flex items-center justify-center mb-6 transition-transform duration-300 hover:scale-110" aria-label="Open bot automation page">
-              <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-              </svg>
-            </a>
-            <h3 class="text-xl font-bold text-gray-900 mb-4">Bot Automation</h3>
-            <p class="text-gray-600 mb-6">
-              Custom bot development for popular platforms including Telegram, Instagram, YouTube, and more. Automate repetitive tasks and improve efficiency.
-            </p>
-            <ul class="space-y-3">
-              <li class="flex items-center animate-fadeInUp" style="animation-delay: 500ms;">
-                <svg class="w-5 h-5 text-blue-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
-                </svg>
-                <span>Telegram bot development</span>
-              </li>
-              <li class="flex items-center animate-fadeInUp" style="animation-delay: 600ms;">
-                <svg class="w-5 h-5 text-blue-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
-                </svg>
-                <span>Instagram automation tools</span>
-              </li>
-              <li class="flex items-center animate-fadeInUp" style="animation-delay: 700ms;">
-                <svg class="w-5 h-5 text-blue-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
-                </svg>
-                <span>YouTube comment management bots</span>
-              </li>
-            </ul>
+          <div class="reveal glass-panel rounded-[1.6rem] p-8 section-glow">
+            <p class="text-cyan-300 font-semibold uppercase tracking-[0.2em] text-sm mb-3">Core capabilities</p>
+            <h3 class="text-2xl font-bold mb-4">Built with modern tools, designed for real life.</h3>
+            <p class="text-stone-300 mb-6">From secure monitoring to elegant automation, every layer is engineered to feel effortless, responsive, and intentional.</p>
+            <div class="flex flex-wrap gap-3 mb-6">
+              <span class="tag-pill">JavaScript</span>
+              <span class="tag-pill">TypeScript</span>
+              <span class="tag-pill">Secure Systems</span>
+              <span class="tag-pill">Smart Control</span>
+            </div>
+            <div class="grid gap-3">
+              <div class="rounded-2xl border border-white/10 bg-black/40 p-4">
+                <p class="font-semibold text-white mb-1">Responsive automation logic</p>
+                <p class="text-sm text-stone-400">Fast, reliable interactions built for comfort and control.</p>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-black/40 p-4">
+                <p class="font-semibold text-white mb-1">Privacy-first infrastructure</p>
+                <p class="text-sm text-stone-400">Security systems designed to protect without feeling intrusive.</p>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-black/40 p-4">
+                <p class="font-semibold text-white mb-1">Elegant deployment experience</p>
+                <p class="text-sm text-stone-400">Clean execution, clear communication, and focused support at every stage.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Why Choose Us Section -->
     <section id="about" class="py-20">
       <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row items-center">
-          <div class="md:w-1/2 mb-10 md:mb-0 relative">
-            <div class="absolute inset-0 bg-blue-200 transform -translate-x-4 -translate-y-4 rounded-lg"></div>
-            <img 
-              src="img no 2.jpg" 
-              alt="Team working" 
-              class="relative rounded-lg shadow-lg w-full" 
-            />
+        <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-center">
+          <div class="reveal">
+            <img id="about-image" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=80" alt="Engineering and automation team" class="w-full rounded-[1.6rem] object-cover h-[420px]" />
           </div>
-          <div class="md:w-1/2 md:pl-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Why Choose Zencron?</h2>
-            <p class="text-xl text-gray-600 mb-8">
-              As a new company, we're focused on providing exceptional service and innovative solutions to help our clients succeed.
-            </p>
-            <div class="space-y-6">
-              <div class="flex items-start">
-                <div class="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-                  <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="text-lg font-bold text-gray-900 mb-2">Latest Technology</h3>
-                  <p class="text-gray-600">
-                    We use cutting-edge technology in all our solutions to ensure you get the best performance and reliability.
-                  </p>
-                </div>
+          <div class="reveal">
+            <p class="text-amber-300 font-semibold uppercase tracking-[0.2em] text-sm mb-3">Why Zencron</p>
+            <h2 class="section-title" id="about-title">Premium service, backed by engineering discipline.</h2>
+            <p class="text-stone-300 text-lg mb-6" id="about-description">We combine thoughtful design, dependable engineering, and hands-on support so every project feels calm, polished, and built to last.</p>
+            <div class="space-y-4">
+              <div class="glass-panel rounded-2xl p-5">
+                <h3 class="font-semibold mb-2" id="about-card-1-title">Built around your space</h3>
+                <p class="text-stone-300" id="about-card-1-text">Every installation is planned around how you use the space, what you value, and how you want it to feel.</p>
               </div>
-              <div class="flex items-start">
-                <div class="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-                  <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="text-lg font-bold text-gray-900 mb-2">Expert Team</h3>
-                  <p class="text-gray-600">
-                    Our team consists of experienced professionals with deep expertise in automation technologies and systems.
-                  </p>
-                </div>
+              <div class="glass-panel rounded-2xl p-5">
+                <h3 class="font-semibold mb-2" id="about-card-2-title">Support that stays close</h3>
+                <p class="text-stone-300" id="about-card-2-text">From first conversation to long after installation, we stay involved and responsive.</p>
               </div>
-              <div class="flex items-start">
-                <div class="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-                  <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="text-lg font-bold text-gray-900 mb-2">24/7 Support</h3>
-                  <p class="text-gray-600">
-                    We offer round-the-clock support to ensure any issues are addressed quickly and your systems are always running smoothly.
-                  </p>
-                </div>
+              <div class="glass-panel rounded-2xl p-5">
+                <h3 class="font-semibold mb-2" id="about-card-3-title">Crafted with restraint</h3>
+                <p class="text-stone-300" id="about-card-3-text">The experience is as considered as the systems themselves — refined, dependable, and quietly ahead of what’s expected.</p>
               </div>
             </div>
           </div>
@@ -682,278 +555,332 @@
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="relative py-20 overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-600/20"></div>
-      <div class="container mx-auto px-4 text-center relative z-10">
-        <div class="glass-card rounded-[2rem] p-10 md:p-16">
-        <h2 class="text-3xl md:text-4xl font-bold mb-6 animate-fadeInUp">Ready to Transform Your Space with Smart Automation?</h2>
-        <p class="text-xl mb-8 max-w-3xl mx-auto animate-fadeInUp" style="animation-delay: 200ms;">
-          Contact us today to discuss your automation needs and get a free consultation.
-        </p>
-        <a 
-          href="#contact" 
-          class="btn-primary inline-block px-8 py-4 font-medium"
-        >
-          Contact Us Now
-        </a>
+    <section class="py-20">
+      <div class="container mx-auto px-4">
+        <div class="glass-panel rounded-[2rem] p-8 md:p-12 overflow-hidden relative">
+          <div class="absolute inset-0 bg-gradient-to-r from-amber-400/10 via-transparent to-white/5"></div>
+          <div class="relative z-10 text-center max-w-3xl mx-auto">
+            <p class="text-cyan-300 font-semibold uppercase tracking-[0.2em] text-sm mb-3">Ready to upgrade</p>
+            <h2 class="text-3xl md:text-4xl font-black mb-4" id="cta-heading">Let’s make your space feel sharper, calmer, and more alive.</h2>
+            <p class="text-stone-300 text-lg mb-8" id="cta-description">Whether you want stronger security, a more effortless home, or smarter day-to-day operations, Zencron brings clarity, precision, and real comfort to the process.</p>
+            <a href="#contact" class="button-primary" id="cta-button">Start Your Project</a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="py-20">
       <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-12 text-center animate-fadeInUp">Get in Touch</h2>
-          
-          <div class="grid md:grid-cols-2 gap-12">
-            <div class="animate-fadeInUp">
-              <div class="glass-card info-card rounded-2xl p-8 mb-8">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">Contact Information</h3>
-                <div class="space-y-4">
-                  <div class="flex items-start transform transition-transform duration-300 hover:translate-x-2">
-                    <svg class="w-6 h-6 text-blue-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                    </svg>
-                    <a href="https://www.google.com/maps?q=10.393792,77.975381" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">
-                      1/203 Naidu Street, chettinalayanpatti, Dindigul, Tamil Nadu 624004
-                    </a>
-                  </div>
-                  <div class="flex items-start transform transition-transform duration-300 hover:translate-x-2">
-                    <svg class="w-6 h-6 text-blue-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                    </svg>
-                    <a href="tel:+916385285597" onclick="window.location.href='tel:+916385285597'" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">+91 6385285597</a>
-                  </div>
-                  <div class="flex items-start transform transition-transform duration-300 hover:translate-x-2">
-                    <svg class="w-6 h-6 text-blue-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                    </svg>
-                    <a href="mailto:zencronautomation.help@gmail.com" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">zencronautomation.help@gmail.com</a>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="glass-card info-card rounded-2xl p-8">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">Business Hours</h3>
-                <div class="space-y-2 text-gray-600">
-                  <p class="flex justify-between">
-                    <span>Monday - Friday:</span>
-                    <span>9:00 AM - 6:00 PM</span>
-                  </p>
-                  <p class="flex justify-between">
-                    <span>Saturday:</span>
-                    <span>10:00 AM - 4:00 PM</span>
-                  </p>
-                  <p class="flex justify-between">
-                    <span>Sunday:</span>
-                    <span>Closed</span>
-                  </p>
-                </div>
-              </div>
+        <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-8">
+          <div class="reveal glass-panel rounded-[1.6rem] p-8">
+            <p class="text-amber-300 font-semibold uppercase tracking-[0.2em] text-sm mb-3">Contact</p>
+            <h2 class="text-2xl font-bold mb-4" id="contact-heading">Tell us what you want to simplify, secure, or elevate.</h2>
+            <p class="text-stone-300 mb-8" id="contact-description">From first conversation to final installation, we keep the process clear, calm, and carefully tailored.</p>
+            <div class="space-y-4 text-stone-300">
+              <a href="https://www.google.com/maps?q=10.393792,77.975381" target="_blank" rel="noopener noreferrer" class="flex items-start gap-3 hover:text-amber-300 transition">
+                <span class="text-amber-300 mt-1">✦</span>
+                <span id="contact-address">1/203 Naidu Street, Chettinaayanpatti, Dindigul, Tamil Nadu 624004</span>
+              </a>
+              <a href="tel:+916385285597" class="flex items-start gap-3 hover:text-amber-300 transition">
+                <span class="text-amber-300 mt-1">✦</span>
+                <span id="contact-phone">+91 6385285597</span>
+              </a>
+              <a href="mailto:zencronautomation.help@gmail.com" class="flex items-start gap-3 hover:text-amber-300 transition">
+                <span class="text-amber-300 mt-1">✦</span>
+                <span id="contact-email">zencronautomation.help@gmail.com</span>
+              </a>
             </div>
-            
-            <div class="animate-fadeInUp contact-card" style="animation-delay: 200ms;">
-              <form id="contact-form" class="glass-card rounded-2xl p-8 space-y-6">
-                <div>
-                  <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                    placeholder="Your name"
-                    required
-                  />
-                </div>
-                <div>
-                  <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                    placeholder="your@email.com"
-                    required
-                  />
-                </div>
-                <div>
-                  <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows="5"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                    placeholder="How can we help you?"
-                    required
-                  ></textarea>
-                </div>
-                <button
-                  type="submit"
-                  class="w-full px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-                >
-                  Send Message
-                </button>
-                <div id="success-message" class="hidden mt-4 p-4 bg-green-100 text-green-700 rounded-md animate-fadeIn">
-                  Thank you! We've received your message and will get back to you soon.
-                </div>
-              </form>
-            </div>
+          </div>
+
+          <div class="reveal glass-panel rounded-[1.6rem] p-8">
+            <form class="space-y-5">
+              <div>
+                <label class="block text-sm text-stone-300 mb-2">Name</label>
+                <input type="text" class="w-full rounded-2xl border border-white/10 bg-black/70 px-4 py-3 text-white outline-none focus:border-amber-400" placeholder="Your name" />
+              </div>
+              <div>
+                <label class="block text-sm text-stone-300 mb-2">Email</label>
+                <input type="email" class="w-full rounded-2xl border border-white/10 bg-black/70 px-4 py-3 text-white outline-none focus:border-amber-400" placeholder="you@example.com" />
+              </div>
+              <div>
+                <label class="block text-sm text-stone-300 mb-2">Project details</label>
+                <textarea rows="5" class="w-full rounded-2xl border border-white/10 bg-black/70 px-4 py-3 text-white outline-none focus:border-amber-400" placeholder="Tell us about your automation goals."></textarea>
+              </div>
+              <button type="submit" class="button-primary w-full">Send Inquiry</button>
+            </form>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <script>
-    const revealElements = document.querySelectorAll('.reveal');
-
-    const revealOnScroll = () => {
-      revealElements.forEach((element) => {
-        const rect = element.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 90) {
-          element.classList.add('is-visible');
-        }
-      });
-    };
-
-    window.addEventListener('scroll', revealOnScroll);
-    window.addEventListener('load', revealOnScroll);
-  </script>
-
-  <!-- Footer -->
-  <footer class="py-12">
-    <div class="container mx-auto px-4">
-      <div class="grid md:grid-cols-4 gap-8">
-        <div>
-          <h3 class="text-xl font-bold mb-4 text-blue-400">AutoTech</h3>
-          <p class="text-gray-400 mb-4">
-            Providing innovative automation solutions for businesses and homeowners.
-          </p>
-          <div class="flex space-x-4">
-            <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 transform hover:scale-110">
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
-              </svg>
-            </a>
-            <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 transform hover:scale-110">
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
-              </svg>
-            </a>
-            <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 transform hover:scale-110">
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
-              </svg>
-            </a>
-            <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 transform hover:scale-110">
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-              </svg>
-            </a>
-          </div>
-        </div>
-        
-        <div>
-          <h3 class="text-lg font-bold mb-4 text-blue-400">Quick Links</h3>
-          <ul class="space-y-2">
-            <li><a href="#home" class="text-gray-400 hover:text-white transition-colors duration-300 transform hover:translate-x-1">Home</a></li>
-            <li><a href="#services" class="text-gray-400 hover:text-white transition-colors duration-300 transform hover:translate-x-1">Services</a></li>
-            <li><a href="#about" class="text-gray-400 hover:text-white transition-colors duration-300 transform hover:translate-x-1">About</a></li>
-            <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors duration-300 transform hover:translate-x-1">Contact</a></li>
-          </ul>
-        </div>
-        
-        <div>
-          <h3 class="text-lg font-bold mb-4 text-blue-400">Services</h3>
-          <ul class="space-y-2">
-            <li><a href="#services" class="text-gray-400 hover:text-white transition-colors duration-300 transform hover:translate-x-1">CCTV Installation</a></li>
-            <li><a href="#services" class="text-gray-400 hover:text-white transition-colors duration-300 transform hover:translate-x-1">Home Automation</a></li>
-            <li><a href="#services" class="text-gray-400 hover:text-white transition-colors duration-300 transform hover:translate-x-1">Bot Development</a></li>
-          </ul>
-        </div>
-        
-        <div>
-          <h3 class="text-lg font-bold mb-4 text-blue-400">Newsletter</h3>
-          <p class="text-gray-400 mb-4">Stay updated with our latest news and offers.</p>
-          <form class="flex">
-            <input
-              type="email"
-              placeholder="Your email"
-              class="px-4 py-2 w-full rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
-            />
-            <button
-              type="submit"
-              class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-r-md transition-all duration-300 transform hover:scale-105"
-            >
-              Subscribe
-            </button>
-          </form>
-        </div>
-      </div>
-      
-      <div class="mt-12 pt-8 border-t border-gray-700 text-center text-gray-400">
-        <p>&copy; 2023 AutoTech. All rights reserved.</p>
+  <footer class="py-10 border-t border-white/10">
+    <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-stone-400">
+            <p id="footer-text">© 2026 Zencron Automation. Crafted for calm, intelligent living.</p>
+            <div class="flex gap-4">
+        <a href="#home" class="hover:text-amber-300 transition" id="footer-link-home">Home</a>
+        <a href="#services" class="hover:text-amber-300 transition" id="footer-link-services">Services</a>
+        <a href="#contact" class="hover:text-amber-300 transition" id="footer-link-contact">Contact</a>
       </div>
     </div>
   </footer>
 
-  <!-- JavaScript -->
   <script>
-    // Mobile menu toggle
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobile-menu');
-      const icon = document.getElementById('mobile-menu-icon');
-      menu.classList.toggle('hidden');
-      icon.classList.toggle('rotate-90');
+    const revealItems = document.querySelectorAll('.reveal');
+    const root = document.documentElement;
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas ? canvas.getContext('2d') : null;
+    const contentStorageKey = 'zencronSiteContent';
+
+    const defaultContent = {
+      heroBadge: 'JavaScript • TypeScript • Designed to feel effortless',
+      heroTitle: 'The kind of experience people notice the moment they step in.',
+      heroDescription: 'We create intelligent spaces that feel calm, private, and beautifully in sync with daily life — from secure environments to custom automations that quietly do the heavy lifting.',
+      heroImage: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80',
+      aboutImage: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=80',
+      servicesLabel: 'Core services',
+      servicesTitle: 'Precision solutions for modern spaces.',
+      servicesDescription: 'Every installation is shaped around the way you live, work, and protect what matters most.',
+      heroPrimary: 'Book a Private Consultation',
+      heroSecondary: 'See What We Build',
+      heroPills: ['Private by design', 'Built for everyday ease', 'Crafted with JavaScript & TypeScript'],
+      serviceCctvTitle: 'Private Surveillance',
+      serviceCctvText: 'Clear, reliable monitoring designed to keep watch without making the space feel overbuilt.',
+      serviceHomeTitle: 'Domestic Intelligence',
+      serviceHomeText: 'Lighting, comfort, and security that respond with subtle precision to the rhythm of your home.',
+      serviceBotTitle: 'JavaScript & TypeScript Automation',
+      serviceBotText: 'Tailored automations and digital assistants built with JavaScript and TypeScript to remove repetition and keep work moving smoothly.',
+      aboutTitle: 'Premium service, backed by engineering discipline.',
+      aboutDescription: 'We combine thoughtful design, dependable engineering, and hands-on support so every project feels calm, polished, and built to last.',
+      aboutCard1Title: 'Built around your space',
+      aboutCard1Text: 'Every installation is planned around how you use the space, what you value, and how you want it to feel.',
+      aboutCard2Title: 'Support that stays close',
+      aboutCard2Text: 'From first conversation to long after installation, we stay involved and responsive.',
+      aboutCard3Title: 'Crafted with restraint',
+      aboutCard3Text: 'The experience is as considered as the systems themselves — refined, dependable, and quietly ahead of what’s expected.',
+      ctaHeading: 'Let’s make your space feel sharper, calmer, and more alive.',
+      ctaDescription: 'Whether you want stronger security, a more effortless home, or smarter day-to-day operations, Zencron brings clarity, precision, and real comfort to the process.',
+      ctaButton: 'Start Your Project',
+      contactHeading: 'Tell us what you want to simplify, secure, or elevate.',
+      contactDescription: 'From first conversation to final installation, we keep the process clear, calm, and carefully tailored.',
+      contactAddress: '1/203 Naidu Street, Chettinaayanpatti, Dindigul, Tamil Nadu 624004',
+      contactPhone: '+91 6385285597',
+      contactEmail: 'zencronautomation.help@gmail.com'
+    };
+
+    const applySiteContent = () => {
+      const saved = localStorage.getItem(contentStorageKey);
+      const data = saved ? { ...defaultContent, ...JSON.parse(saved) } : defaultContent;
+      const setText = (id, value) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+      };
+
+      setText('hero-badge', data.heroBadge);
+      setText('hero-title', data.heroTitle);
+      setText('hero-description', data.heroDescription);
+      setText('services-label', data.servicesLabel);
+      setText('services-title', data.servicesTitle);
+      setText('services-description', data.servicesDescription);
+      setText('footer-text', data.footerText);
+      setText('footer-link-home', data.footerLinkHome);
+      setText('footer-link-services', data.footerLinkServices);
+      setText('footer-link-contact', data.footerLinkContact);
+      const heroImageEl = document.getElementById('hero-image');
+      if (heroImageEl && data.heroImage) heroImageEl.src = data.heroImage;
+      const aboutImageEl = document.getElementById('about-image');
+      if (aboutImageEl && data.aboutImage) aboutImageEl.src = data.aboutImage;
+      setText('hero-cta-primary', data.heroPrimary);
+      setText('hero-cta-secondary', data.heroSecondary);
+      setText('hero-pill-1', data.heroPills[0] || '');
+      setText('hero-pill-2', data.heroPills[1] || '');
+      setText('hero-pill-3', data.heroPills[2] || '');
+      setText('service-cctv-title', data.serviceCctvTitle);
+      setText('service-cctv-text', data.serviceCctvText);
+      setText('service-home-title', data.serviceHomeTitle);
+      setText('service-home-text', data.serviceHomeText);
+      setText('service-bot-title', data.serviceBotTitle);
+      setText('service-bot-text', data.serviceBotText);
+      setText('about-title', data.aboutTitle);
+      setText('about-description', data.aboutDescription);
+      setText('about-card-1-title', data.aboutCard1Title);
+      setText('about-card-1-text', data.aboutCard1Text);
+      setText('about-card-2-title', data.aboutCard2Title);
+      setText('about-card-2-text', data.aboutCard2Text);
+      setText('about-card-3-title', data.aboutCard3Title);
+      setText('about-card-3-text', data.aboutCard3Text);
+      setText('cta-heading', data.ctaHeading);
+      setText('cta-description', data.ctaDescription);
+      setText('cta-button', data.ctaButton);
+      setText('contact-heading', data.contactHeading);
+      setText('contact-description', data.contactDescription);
+      setText('contact-address', data.contactAddress);
+      setText('contact-phone', data.contactPhone);
+      setText('contact-email', data.contactEmail);
+    };
+
+    const revealOnScroll = () => {
+      const scrollY = window.scrollY;
+      const max = window.innerHeight * 1.6;
+      const progress = Math.min(scrollY / max, 1);
+      root.style.setProperty('--bg-angle', `${135 + progress * 70}deg`);
+      root.style.setProperty('--bg-shift', `${scrollY * 0.3}`);
+
+      revealItems.forEach((item) => {
+        const rect = item.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 120) item.classList.add('is-visible');
+      });
+    };
+
+    if (menuToggle && mobileMenu && menuIcon) {
+      menuToggle.addEventListener('click', () => {
+        const isOpen = !mobileMenu.classList.contains('hidden');
+        mobileMenu.classList.toggle('hidden', isOpen);
+        menuIcon.innerHTML = isOpen
+          ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"></path>'
+          : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 18L18 6M6 6l12 12"></path>';
+      });
+
+      mobileMenu.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"></path>';
+        });
+      });
     }
 
-    // Form submission
-    document.getElementById('contact-form').addEventListener('submit', function(e) {
-      e.preventDefault();
+    if (ctx && canvas) {
+      const particles = [];
+      const mouse = { x: null, y: null, radius: 140 };
 
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
-      const mailTo = 'zencronautomation.help@gmail.com';
-      const subject = encodeURIComponent('Website Contact Form Submission');
-      const body = encodeURIComponent(
-        `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-      );
-
-      window.location.href = `mailto:${mailTo}?subject=${subject}&body=${body}`;
-
-      const successMessage = document.getElementById('success-message');
-      successMessage.classList.remove('hidden');
-      this.reset();
-      
-      setTimeout(() => {
-        successMessage.classList.add('hidden');
-      }, 3000);
-    });
-
-    // Animation observer
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('translate-y-0', 'opacity-100');
+      const resizeCanvas = () => {
+        canvas.width = window.innerWidth * window.devicePixelRatio;
+        canvas.height = window.innerHeight * window.devicePixelRatio;
+        ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+        canvas.style.width = `${window.innerWidth}px`;
+        canvas.style.height = `${window.innerHeight}px`;
+        const count = Math.min(110, Math.floor(window.innerWidth / 16));
+        particles.length = 0;
+        for (let i = 0; i < count; i += 1) {
+          particles.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            vx: (Math.random() - 0.5) * 0.22,
+            vy: (Math.random() - 0.5) * 0.22,
+            r: Math.random() * 1.4 + 0.6,
+            alpha: Math.random() * 0.45 + 0.18,
+          });
         }
+      };
+
+      const draw = () => {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        ctx.clearRect(0, 0, width, height);
+
+        ctx.save();
+        ctx.globalAlpha = 0.16;
+        for (let x = 0; x < width; x += 46) {
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, height);
+          ctx.strokeStyle = '#d4af37';
+          ctx.stroke();
+        }
+        for (let y = 0; y < height; y += 46) {
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(width, y);
+          ctx.strokeStyle = '#8a6a24';
+          ctx.stroke();
+        }
+        ctx.restore();
+
+        particles.forEach((p, index) => {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < -20 || p.x > width + 20) p.vx *= -1;
+          if (p.y < -20 || p.y > height + 20) p.vy *= -1;
+
+          if (mouse.x !== null && mouse.y !== null) {
+            const dx = mouse.x - p.x;
+            const dy = mouse.y - p.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < mouse.radius) {
+              const force = (mouse.radius - dist) / mouse.radius;
+              p.x -= (dx / dist) * force * 0.7;
+              p.y -= (dy / dist) * force * 0.7;
+            }
+          }
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(212,175,55,${p.alpha})`;
+          ctx.fill();
+
+          particles.slice(index + 1).forEach((q) => {
+            const dx = p.x - q.x;
+            const dy = p.y - q.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 120) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(q.x, q.y);
+              ctx.strokeStyle = `rgba(212,175,55,${0.06 * (1 - dist / 120)})`;
+              ctx.stroke();
+            }
+          });
+        });
+
+        requestAnimationFrame(draw);
+      };
+
+      window.addEventListener('mousemove', (event) => {
+        mouse.x = event.clientX;
+        mouse.y = event.clientY;
       });
-    }, {
-      threshold: 0.1
+      window.addEventListener('mouseleave', () => {
+        mouse.x = null;
+        mouse.y = null;
+      });
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+      draw();
+    }
+
+    document.addEventListener('keydown', (event) => {
+      const isMasterShortcut = event.ctrlKey && event.altKey && (event.key === 'M' || event.key === 'm' || event.code === 'KeyM');
+      if (!isMasterShortcut) return;
+
+      event.preventDefault();
+      const enteredPassword = prompt('Enter master password to continue');
+      if (enteredPassword === 'zencron2026') {
+        window.location.href = './master.html';
+      } else if (enteredPassword !== null) {
+        alert('Incorrect password.');
+      }
     });
 
-    document.querySelectorAll('[id^="service"]').forEach(service => {
-      service.classList.add('translate-y-10', 'opacity-0');
-      observer.observe(service);
-    });
+    window.masterAccess = function() {
+      const enteredPassword = prompt('Enter master password to continue');
+      if (enteredPassword === 'zencron2026') {
+        window.location.href = './master.html';
+      } else if (enteredPassword !== null) {
+        alert('Incorrect password.');
+      }
+    };
 
-    // Add fade-in-up animation to animate-fadeInUp elements
-    document.querySelectorAll('.animate-fadeInUp').forEach(el => {
-      el.style.animation = 'fadeInUp 0.6s ease-out forwards';
+    window.addEventListener('scroll', revealOnScroll, { passive: true });
+    window.addEventListener('load', () => {
+      applySiteContent();
+      revealOnScroll();
     });
+    window.addEventListener('storage', applySiteContent);
+    applySiteContent();
+    revealOnScroll();
   </script>
 </body>
 </html>
