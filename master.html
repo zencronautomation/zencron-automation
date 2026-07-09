@@ -270,25 +270,48 @@
         document.getElementById('previewDescription').textContent = data.heroDescription || 'Preview description';
       };
 
-      const loadContent = () => {
-        const saved = localStorage.getItem(storageKey);
-        const data = saved ? { ...defaultContent, ...JSON.parse(saved) } : defaultContent;
-        Object.entries(elementMap).forEach(([key, id]) => {
-          const el = document.getElementById(id);
-          if (el) el.value = data[key] || '';
-        });
-        updatePreview();
+      const loadContent = async () => {
+        try {
+          const response = await fetch('/.netlify/functions/content');
+          const data = response.ok ? await response.json() : defaultContent;
+          Object.entries(elementMap).forEach(([key, id]) => {
+            const el = document.getElementById(id);
+            if (el) el.value = data[key] || '';
+          });
+          updatePreview();
+        } catch (error) {
+          console.error('Error loading content:', error);
+          const data = defaultContent;
+          Object.entries(elementMap).forEach(([key, id]) => {
+            const el = document.getElementById(id);
+            if (el) el.value = data[key] || '';
+          });
+          updatePreview();
+        }
       };
 
-      const saveContent = () => {
-        const data = {};
-        fields.forEach((field) => {
-          const input = document.getElementById(elementMap[field]);
-          data[field] = input ? input.value : defaultContent[field];
-        });
-        localStorage.setItem(storageKey, JSON.stringify(data));
-        window.dispatchEvent(new Event('storage'));
-        alert('Content updated successfully.');
+      const saveContent = async () => {
+        try {
+          const data = {};
+          fields.forEach((field) => {
+            const input = document.getElementById(elementMap[field]);
+            data[field] = input ? input.value : defaultContent[field];
+          });
+          const response = await fetch('/.netlify/functions/content', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+          if (response.ok) {
+            window.dispatchEvent(new Event('storage'));
+            alert('Content updated successfully.');
+          } else {
+            alert('Error saving content. Please try again.');
+          }
+        } catch (error) {
+          console.error('Error saving content:', error);
+          alert('Error saving content. Check console for details.');
+        }
       };
 
       document.querySelectorAll('input, textarea').forEach((el) => {
@@ -296,8 +319,12 @@
       });
 
       document.getElementById('saveBtn').addEventListener('click', saveContent);
-      document.getElementById('resetBtn').addEventListener('click', () => {
-        localStorage.removeItem(storageKey);
+      document.getElementById('resetBtn').addEventListener('click', async () => {
+        await fetch('/.netlify/functions/content', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(defaultContent)
+        });
         loadContent();
         alert('Content reset to default.');
       });
